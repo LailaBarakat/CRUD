@@ -19,27 +19,27 @@ class StudentModel extends DataBase
         $this->classID = $classID;
     }
 
-    public function getStudentID(): int
+    public function getid(): int
     {
         return $this->studentID;
     }
 
-    public function getFirstname(): string
+    public function getfirst_name(): string
     {
         return $this->firstname;
     }
 
-    public function getLastname(): string
+    public function getlast_name(): string
     {
         return $this->lastname;
     }
 
-    public function getEmail(): string
+    public function getemail(): string
     {
         return $this->email;
     }
 
-    public function getClassID(): int
+    public function getclassid(): int
     {
         return $this->classID;
     }
