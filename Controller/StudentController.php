@@ -7,16 +7,24 @@ class StudentController
     public function render(array $GET, array $POST): void
     {
 
-        $pdo = new StudentModel();
-        $students = $pdo->getStudents();
+        $pdo = new StudentLoader();
+        $students = $pdo->getAllStudents();
 
-    //this is for updating && deleting (elseif)
+        require "View/studentOverview.php";
+
+        /*
+        $pdo = new StudentLoader();
+
+
+        //this is for updating && deleting (elseif)
         if (!empty($_POST['firstName']) && !empty($_POST['lastName'])) {
             if (empty($_POST['id'])) {
                 //run code to add a new student to the database;
+                $pdo->insertNewStudent();
             } else {
                 //run code to update existing student;
                 //update all required fields;
+
             }
         } elseif (isset($_POST['delete'])) {
             //run code to delete selected user
@@ -63,5 +71,7 @@ class StudentController
                     break;
             }
         }
+        */
     }
+
 }
