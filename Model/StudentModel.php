@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 
 class StudentModel extends DataBase
@@ -7,14 +8,15 @@ class StudentModel extends DataBase
     private string $firstname;
     private string $lastname;
     private string $email;
+    private int $classID;
 
-    public function __construct($id, $firstname, $lastname, $email)
+    public function __construct($id, $firstname, $lastname, $email, $classID)
     {
         $this->studentID = $id;
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;
-
+        $this->classID = $classID;
     }
 
     public function getStudentID(): int
@@ -35,6 +37,11 @@ class StudentModel extends DataBase
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function getClassID(): int
+    {
+        return $this->classID;
     }
 
 }
