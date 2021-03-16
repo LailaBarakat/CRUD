@@ -7,9 +7,11 @@ error_reporting(E_ALL);
 
 //include all your model files here
 require 'Model/DataBase.php';
-require 'Model/ClassModel.php';
+require 'Model/ClassLoader.php';
 require 'Model/StudentModel.php';
 require 'Model/TeacherModel.php';
+require 'Model/StudentLoader.php';
+
 //include all your controllers here
 require 'Controller/HomepageController.php';
 require 'Controller/ClassController.php';
@@ -20,7 +22,8 @@ require 'Controller/TeacherController.php';
 //this file should never be more than 20 lines of code!
 $page = $_GET['page']??'';
 
-$controller = new HomepageController();
+$controller = new StudentController();
+/*
 if(isset($_GET['page'])){
     $controller = match ($_GET['page']) {
         'class' => new ClassController(),
@@ -28,5 +31,6 @@ if(isset($_GET['page'])){
         'student' => new StudentController(),
     };
 }
+*/
 
 $controller->render($_GET, $_POST);
