@@ -1,22 +1,19 @@
 <?php
 
 require_once 'StudentModel.php';
+require_once 'DataBase.php';
 
 class StudentLoader{
 
 private array $studentArray = [];
 
-    private string $servername = "localhost";
-    private string $username = "root";
-    private string $password = "root";
-    private string $dbname = "";
 
-
-    public function getAllStudents (){
+    public function getAllStudents ():array {
 
     try {
-        $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $DB = new DataBase();
+        $conn = $DB->connect();
+
         $stmt = $conn->prepare("SELECT id, first_name, last_name, email, classID FROM Student");
         $stmt->execute();
 
@@ -36,12 +33,12 @@ private array $studentArray = [];
 
 }
 
-    public function insertNewStudent (StudentModel $student){
+    public function insertNewStudent (StudentModel $student):void {
 
     try {
-        $conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
-        // set the PDO error mode to exception
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $DB = new DataBase();
+        $conn = $DB->connect();
+
         $id=$student->getid();
         $first_name=$student->getfirst_name();
         $last_name=$student->getlast_name();
