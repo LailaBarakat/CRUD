@@ -57,4 +57,24 @@ private array $studentArray = [];
     $conn = null;
 }
 
+    public function updateStudent(StudentModel $student): void
+    {
+        try {
+            $DB = new DataBase();
+            $conn = $DB->connect();
+
+            $id = $student->getid();
+            $first_name = $student->getfirst_name();
+            $last_name = $student->getlast_name();
+            $email = $student->getemail();
+            $classID = $student->getclassID();
+            $sql = "UPDATE Student SET  first_name = '$first_name', last_name = '$last_name', email = '$email', classID = '$classID' WHERE id = '$id'";
+            $conn->exec($sql);
+
+        } catch (PDOException $e) {
+            //echo $sql . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
 }
