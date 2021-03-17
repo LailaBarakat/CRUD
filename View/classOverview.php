@@ -25,8 +25,8 @@ require "includes/header.php"
     <tbody>
     <?php foreach($classes AS $class):?>
         <tr>
-            <td><?php echo htmlspecialchars($class->getclasslocation())?></td>
             <td><?php echo htmlspecialchars($class->getclassname())?></td>
+            <td><?php echo htmlspecialchars($class->getclasslocation())?></td>
             <td><?php echo htmlspecialchars($class->getteacherid())?></td>
             <td>
                 <a href="?page=class&run=update&id=<?php echo $class->getclassid()?>" class="btn btn-primary">Edit</a>
@@ -38,7 +38,6 @@ require "includes/header.php"
                 </form>
             </td>
             <td>
-                <input type="submit" name="Info" value="info" class="btn btn-success">
                 <a href="?page=class&run=detailed&id=<?php echo $class->getclassid()?>" class="btn btn-success">Info</a>
             </td>
         </tr>
