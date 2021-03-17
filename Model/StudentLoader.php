@@ -20,7 +20,7 @@ private array $studentArray = [];
         // set the resulting array to associative
         $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $row) {
-            $student=new StudentModel($row['id'],$row['first_name'],$row['last_name'],$row['email'],$row['classID']);
+            $student=new StudentModel(intval($row['id']),$row['first_name'],$row['last_name'],$row['email'],intval($row['classID']));
             array_push($this->studentArray, $student);
         }
     } catch(PDOException $e) {
