@@ -10,7 +10,7 @@ class StudentModel extends DataBase
     private string $email;
     private int $classID;
 
-    public function __construct($id, $firstname, $lastname, $email, $classID)
+    public function __construct( $id, $firstname, $lastname, $email, $classID)
     {
         $this->studentID = $id;
         $this->firstname = $firstname;

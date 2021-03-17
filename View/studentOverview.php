@@ -33,7 +33,7 @@ require "includes/header.php"
             <td><?php echo htmlspecialchars($student->getlast_name())?></td>
             <td><?php echo htmlspecialchars($student->getemail())?></td>
             <td>
-                <a href="?id=<?php echo $student->getid()?>" class="btn btn-primary">Edit</a>
+                <a href="?page=students&run=update&id=<?php echo $student->getid()?>" class="btn btn-primary">Edit</a>
             </td>
             <td>
                 <form method="post">
@@ -42,7 +42,7 @@ require "includes/header.php"
                 </form>
             </td>
             <td>
-                <input type="submit" name="Info" value="info" class="btn btn-success">
+                <a href="?page=students&run=detailed&id=<?php echo $student->getid()?>" class="btn btn-success">Info</a>
             </td>
         </tr>
         </tr>
