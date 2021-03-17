@@ -33,7 +33,7 @@ require "includes/header.php"
             <td><?php echo htmlspecialchars($class->getname())?></td>
             <td><?php echo htmlspecialchars($class->getteacherid())?></td>
             <td>
-                <a href="?id=<?php echo $class->getid()?>" class="btn btn-primary">Update</a>
+                <a href="?id=<?php echo $class->getid()?>" class="btn btn-primary">Edit</a>
             </td>
             <td>
                 <form method="post">
