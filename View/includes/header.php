@@ -9,6 +9,7 @@
     <title>Becode - Boiler plate MVC</title>
 </head>
 <body>
+    <?php require 'navigation.php' ?>
     <header>
         <h1>Welcome to my site</h1>
     </header>
