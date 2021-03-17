@@ -31,7 +31,7 @@ require "includes/header.php"
         <tr>
             <td><?php echo htmlspecialchars($class->getlocation())?></td>
             <td><?php echo htmlspecialchars($class->getname())?></td>
-            <td><?php echo htmlspecialchars($class->geteacherid())?></td>
+            <td><?php echo htmlspecialchars($class->getteacherid())?></td>
             <td>
                 <a href="?id=<?php echo $class->getid()?>" class="btn btn-primary">Update</a>
             </td>
