@@ -50,6 +50,8 @@ require "includes/header.php"
     </tbody>
 </table>
 
+<a href="?page=students&run=create" class="btn btn-primary">Create Student</a>
+
 <style>
     label {
         cursor: pointer;
