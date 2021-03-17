@@ -58,13 +58,13 @@ class StudentController
         if (isset($_GET)) {
             switch ($_GET['run'] ?? '') {
                 case 'create':
-                    require 'View/create.php';
+                    require 'View/studentCreate.php';
                     break;
                 case 'detailed':
-                    require 'View/detailed.php';
+                    require 'View/studentDetailed.php';
                     break;
                 case 'edit':
-                    require 'View/edit.php';
+                    require 'View/studentEdit.php';
                     break;
                 default:
                     require 'View/general.php';
