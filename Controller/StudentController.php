@@ -16,7 +16,7 @@ class StudentController
 
                 $message= 'New Student Added';
             }else{
-                $update = new StudentModel( $_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int) $_POST['class']);
+                $update = new StudentModel( (int) $_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int) $_POST['class']);
                 $pdo->updateStudent($update);
 
                 $message= 'Student Updated';
@@ -25,7 +25,7 @@ class StudentController
 
         }
         if(!empty($_POST['delete'])){
-            $delete = $pdo->getStudent($_POST['id']);
+            $delete = $pdo->getStudent((int)$_POST['id']);
             $pdo->deleteStudent($delete);
 
             $message= 'Student Deleted';
@@ -37,11 +37,11 @@ class StudentController
                     require 'View/studentCreate.php';
                     break;
                 case 'detailed':
-                    $student = $pdo->getStudent($_GET['id']); //placeholder
+                    $student = $pdo->getStudent((int)$_GET['id']); //placeholder
                     require 'View/studentDetail.php';
                     break;
                 case 'update':
-                    $student = $pdo->getStudent($_GET['id']);
+                    $student = $pdo->getStudent((int)$_GET['id']);
                     require 'View/studentEdit.php';
                     break;
                 default:
