@@ -7,6 +7,25 @@ class StudentLoader{
 
 private array $studentArray = [];
 
+    public function getStudent(int $id): StudentModel
+    {
+
+        try {
+
+            $DB = new DataBase();
+            $conn = $DB->connect();
+
+            $stmt = $conn->query("SELECT id, first_name, last_name, email, classID FROM Student WHERE id = $id");
+            $result = $stmt->fetch();
+            $student = new StudentModel( (int) $result['id'], $result['first_name'], $result['last_name'], $result['email'], (int) $result['classID']);
+
+        } catch (PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+        return $student;
+
+    }
 
     public function getAllStudents ():array {
 
