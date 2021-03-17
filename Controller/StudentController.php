@@ -8,52 +8,28 @@ class StudentController
     {
 
         $pdo = new StudentLoader();
-        $students = $pdo->getAllStudents();
 
-        require "View/studentOverview.php";
+        if(!empty($_POST['first_name']) && !empty($_POST['last_name'])){
+            if(empty($_POST['id'])){
+                $new = new StudentModel( null, $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int) $_POST['class']);
+                $pdo->insertNewStudent($new);
 
-        /*
-        $pdo = new StudentLoader();
+                $message= 'New Student Added';
+            }else{
+                $update = new StudentModel( $_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int) $_POST['class']);
+                $pdo->updateStudent($update);
 
-
-        //this is for updating && deleting (elseif)
-        if (!empty($_POST['firstName']) && !empty($_POST['lastName'])) {
-            if (empty($_POST['id'])) {
-                //run code to add a new student to the database;
-                $pdo->insertNewStudent();
-            } else {
-                //run code to update existing student;
-                //update all required fields;
+                $message= 'Student Updated';
 
             }
-        } elseif (isset($_POST['delete'])) {
-            //run code to delete selected user
-        }
-
-        //run code to get array of all the students from Model
-
-        $saveLabel = 'Save Record';
-
-        if (!empty($_GET['id'])) {
-            $saveLabel = 'Save Record';
-
-            //run code to fetch info about single student
-            $selectedUser = 'student array';
 
         }
-        if (empty($selectedUser['id'])) {
-            $selectedUser = [
-                'id' => '',
-                'firstname' => '',
-                'lastname' => '',
-                'sports' => []
-            ];
+        if(!empty($_POST['delete'])){
+            $delete = $pdo->getStudent($_POST['id']);
+            $pdo->deleteStudent($delete);
+
+            $message= 'Student Deleted';
         }
-
-        //you should not echo anything inside your controller - only assign vars here
-        // then the view will actually display them.
-
-        //load the view
 
         if (isset($_GET)) {
             switch ($_GET['run'] ?? '') {
@@ -61,17 +37,20 @@ class StudentController
                     require 'View/studentCreate.php';
                     break;
                 case 'detailed':
-                    require 'View/studentDetailed.php';
+                    $student = $pdo->getStudent($_GET['id']); //placeholder
+                    require 'View/studentDetail.php';
                     break;
-                case 'edit':
+                case 'update':
+                    $student = $pdo->getStudent($_GET['id']);
                     require 'View/studentEdit.php';
                     break;
                 default:
-                    require 'View/general.php';
+                    $students = $pdo->getAllStudents();
+                    require 'View/studentOverview.php';
                     break;
             }
         }
-        */
+        
     }
 
 }
