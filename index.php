@@ -7,7 +7,6 @@ error_reporting(E_ALL);
 
 //include all your model files here
 require 'Model/DataBase.php';
-require 'Model/ClassLoader.php';
 require 'Model/StudentModel.php';
 require 'Model/TeacherModel.php';
 require 'Model/StudentLoader.php';
@@ -23,14 +22,14 @@ require 'Controller/TeacherController.php';
 $page = $_GET['page']??'';
 
 $controller = new StudentController();
-/*
+
 if(isset($_GET['page'])){
     $controller = match ($_GET['page']) {
-        'class' => new ClassController(),
+        'classes' => new ClassController(),
         'teachers' => new TeacherController(),
-        'student' => new StudentController(),
+        'students' => new StudentController(),
     };
 }
-*/
+
 
 $controller->render($_GET, $_POST);
