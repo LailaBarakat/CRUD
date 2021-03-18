@@ -19,9 +19,12 @@ require "includes/header.php"
 
     <label for="last_name">Location:</label>
     <input type="text" name="location" id="location" required value="<?php echo $class->getclasslocation(); ?>"/>
-
     <label for="teacher">Teacher:</label>
-    <input type="text" name="teacher" id="teacher" value="<?php echo $class->getteacherid(); ?>"/>
+    <select name="teacher" id="teacher">
+        <?php foreach ($teachers as $teacher):?>
+            <option value="<?php echo $teacher->getid()?>"><?php echo $teacher->getteachername()?></option>
+        <?php endforeach; ?>
+    </select>
 
     <input type="submit" value="Edit Class" />
 
