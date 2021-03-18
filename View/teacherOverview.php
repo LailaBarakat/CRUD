@@ -42,7 +42,7 @@ require "includes/header.php"
                 </form>
             </td>
             <td>
-                <input type="submit" name="Info" value="info" class="btn btn-success">
+                <a href="?page=teacher&run=detailed&id=<?php echo $teacher->getid()?>" class="btn btn-success">Info</a>
             </td>
         </tr>
         </tr>
