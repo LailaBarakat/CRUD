@@ -28,6 +28,9 @@ class StudentController
             $delete = $pdo->getStudent((int)$_POST['id']);
             $pdo->deleteStudent($delete);
 
+            if(!empty($_GET['run']) && $_GET['run']==='detailed')
+            {$_GET['run']='';}
+            
             $message= 'Student Deleted';
         }
 
