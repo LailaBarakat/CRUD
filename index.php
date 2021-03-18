@@ -8,10 +8,12 @@ error_reporting(E_ALL);
 //include all your model files here
 require 'Model/DataBase.php';
 require 'Model/ClassLoader.php';
-require 'Model/StudentModel.php';
 require 'Model/TeacherModel.php';
+require 'Model/TeacherLoader.php';
+require 'Model/StudentModel.php';
 require 'Model/StudentLoader.php';
 require 'Model/TeacherLoader.php';
+
 
 //include all your controllers here
 require 'Controller/HomepageController.php';

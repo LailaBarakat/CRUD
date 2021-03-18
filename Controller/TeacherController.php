@@ -45,7 +45,7 @@ class TeacherController {
                     require 'View/teacherEdit.php';
                     break;
                 default:
-                    $teachers = $pdo->getAllTeaches();
+                    $teachers = $pdo->getAllTeachers();
                     require 'View/teacherOverview.php';
                     break;
             }
