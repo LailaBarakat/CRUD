@@ -10,16 +10,16 @@ require "includes/header.php"
 
 <h1>Edit Student Data</h1>
 
-<?php if(isset($message)):?>
+<?php if (isset($message)): ?>
     <div class="alert alert-success" role="alert">
-        <?php echo $message?>
+        <?php echo $message ?>
     </div>
-<?php endif;?>
+<?php endif; ?>
 
 
 <form method="post" id="create-user">
 
-    <input type="hidden" name="id" value="<?php echo $student->getid(); ?>" />
+    <input type="hidden" name="id" value="<?php echo $student->getid(); ?>"/>
 
     <label for="first_name">First name:</label>
     <input type="text" name="first_name" id="first_name" required value="<?php echo $student->getfirst_name(); ?>"/>
@@ -31,9 +31,15 @@ require "includes/header.php"
     <input type="text" name="email" id="email" value="<?php echo $student->getemail(); ?>"/>
 
     <label for="class">Class:</label>
-    <input type="text" name="class" id="class" value="<?php echo $student->getclassid(); ?>"/>
 
-    <input type="submit" value="Update Student" />
+    <select name="class" id="class">
+        <?php foreach ($classes as $class): ?>
+            <option value="<?php echo $class->getclassid() ?>"><?php echo $class->getclassname() ?></option>
+        <?php endforeach; ?>
+    </select>
+
+
+    <input type="submit" value="Update Student"/>
 
 </form>
 
@@ -43,9 +49,11 @@ require "includes/header.php"
     label {
         cursor: pointer;
     }
+
     label {
         display: block;
     }
+
     form#create-user {
         margin-left: 10px;
     }

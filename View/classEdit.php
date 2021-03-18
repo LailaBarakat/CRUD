@@ -21,8 +21,8 @@ require "includes/header.php"
     <input type="text" name="location" id="location" required value="<?php echo $class->getclasslocation(); ?>"/>
     <label for="teacher">Teacher:</label>
     <select name="teacher" id="teacher">
-        <?php foreach ($teachers as $teacher):?>
-            <option value="<?php echo $teacher->getid()?>"><?php echo $teacher->getteachername()?></option>
+        <?php foreach ($teachers as $teacher): ?>
+            <option value="<?php echo $teacher->getid() ?>"><?php echo $teacher->getteachername() ?></option>
         <?php endforeach; ?>
     </select>
 

@@ -33,7 +33,7 @@ require "includes/header.php"
             <option value="<?php echo $teacher->getid()?>"><?php echo $teacher->getteachername()?></option>
         <?php endforeach; ?>
     </select>
-    
+
     <input type="submit" value="Add to list" />
 
 </form>
