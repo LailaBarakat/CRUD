@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 class ClassModel extends DataBase
 {
-    private int $classID;
+    private ?int $classID;
     private string $className;
     private string $classLocation;
     private string $teacherID;
