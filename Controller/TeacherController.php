@@ -37,7 +37,11 @@ class TeacherController {
                     require 'View/teacherCreate.php';
                     break;
                 case 'detailed':
+                    $studentPdo = new StudentLoader();
+
                     $teacher = $pdo->getTeacher((int)$_GET['id']); //placeholder
+                    $students = $studentPdo->fetchStudentsFromTeacher($teacher->getid());
+
                     require 'View/teacherDetail.php';
                     break;
                 case 'update':
