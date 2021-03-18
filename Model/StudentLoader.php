@@ -96,4 +96,21 @@ private array $studentArray = [];
         $conn = null;
     }
 
+    
+    public function deleteStudent(StudentModel $student): void
+    {
+        try {
+            $DB = new DataBase();
+            $conn = $DB->connect();
+
+            $id = $student->getid();
+            $sql = "DELETE FROM Student WHERE id = '$id'";
+            $conn->exec($sql);
+
+        } catch (PDOException $e) {
+            //echo $sql . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
 }
