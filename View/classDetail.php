@@ -32,12 +32,14 @@ require "includes/header.php";
         </tr>
         <tr>
             <td>Teacher:</td>
-            <td>placeholder</td>
+            <td>
+                <a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string)$teacher->getid()); ?>"><?php echo $teacher->getteachername(); ?></a>
+            </td>
         </tr>
         <tr>
             <td>Students:</td>
             <td>
-                <?php foreach ($class->getclassstudents() as $student): ?>
+                <?php foreach ($students as $student): ?>
                     <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo $student['name']; ?></a>
 
                 <?php endforeach; ?>
