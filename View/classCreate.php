@@ -28,8 +28,11 @@ require "includes/header.php"
     <input type="text" name="location" id="location" required value=""/>
 
     <label for="teacher">Teacher:</label>
-    <input type="text" name="teacher" id="teacher" required value=""/>
-
+    <select name="teacher" id="teacher">
+        <?php foreach ($teachers as $teacher):?>
+            <option value="<?php echo $teacher->getid()?>"><?php echo $teacher->getteachername()?></option>
+        <?php endforeach; ?>
+    </select>
 
     <input type="submit" value="Add to list" />
 

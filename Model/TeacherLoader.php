@@ -87,7 +87,7 @@ class TeacherLoader{
             $first_name = $teacher->getfirst_name();
             $last_name = $teacher->getlast_name();
             $email = $teacher->getemail();
-            $sql = "UPDATE Student SET  first_name = '$first_name', last_name = '$last_name', email = '$email' WHERE id = '$id'";
+            $sql = "UPDATE Teacher SET  first_name = '$first_name', last_name = '$last_name', email = '$email' WHERE id = '$id'";
             $conn->exec($sql);
 
         } catch (PDOException $e) {

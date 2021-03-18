@@ -36,6 +36,9 @@ class ClassController
         if (isset($_GET)) {
             switch ($_GET['run'] ?? '') {
                 case 'create':
+                    $teachPdo = new TeacherLoader();
+                    $teachers = $teachPdo->getAllTeachers();
+
                     require 'View/classCreate.php';
                     break;
                 case 'detailed':
@@ -49,6 +52,9 @@ class ClassController
                     require 'View/classDetail.php';
                     break;
                 case 'update':
+                    $teachPdo = new TeacherLoader();
+                    $teachers = $teachPdo->getAllTeachers();
+
                     $class = $pdo->getClass( (int) $_GET['id']);
                     require 'View/classEdit.php';
                     break;
