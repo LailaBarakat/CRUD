@@ -3,12 +3,12 @@ declare(strict_types=1);
 
 class ClassModel extends DataBase
 {
-    private int $classID;
+    private ?int $classID;
     private string $className;
     private string $classLocation;
-    private string $teacherID;
+    private int $teacherID;
 
-    public function __construct($id, $className, $classLocation, $teacherID)
+    public function __construct( int $id, $className, $classLocation, int $teacherID)
     {
         $this->classID = $id;
         $this->className = $className;
@@ -31,7 +31,7 @@ class ClassModel extends DataBase
         return $this->classLocation;
     }
 
-    public function getteacherid(): string
+    public function getteacherid(): int
     {
         return $this->teacherID;
     }
