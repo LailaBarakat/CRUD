@@ -33,7 +33,7 @@ require "includes/header.php"
             <td><?php echo htmlspecialchars($teacher->getlast_name())?></td>
             <td><?php echo htmlspecialchars($teacher->getemail())?></td>
             <td>
-                <a href="?id=<?php echo $teacher->getid()?>" class="btn btn-primary">Edit</a>
+                <a href="?page=teacher&run=update&id=<?php echo $teacher->getid()?>" class="btn btn-primary">Edit</a>
             </td>
             <td>
                 <form method="post">
