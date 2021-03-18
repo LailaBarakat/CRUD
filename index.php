@@ -24,12 +24,19 @@ $page = $_GET['page']??'';
 
 $controller = new StudentController();
 
-if(isset($_GET['page'])){
-    $controller = match ($_GET['page']) {
-        'class' => new ClassController(),
-        'teacher' => new TeacherController(),
-        'student' => new StudentController(),
-    };
+if (isset($_GET['page'])){
+    switch ($_GET['page']){
+        case 'class':
+            $controller = new ClassController();
+            break;
+        case 'teacher':
+            $controller = new TeacherController();
+            break;
+        case 'student':
+            $controller = new StudentController();
+            break;
+
+    }
 }
 
 
