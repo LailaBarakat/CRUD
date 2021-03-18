@@ -18,8 +18,8 @@ require "includes/header.php"
     <table class="table table-striped table-wide">
         <thead>
         <tr>
-            <th width="20%">Location</th>
             <th width="20%">Name</th>
+            <th width="20%">Location</th>
             <th width="20%">Teacher ID</th>
             <td colspan="2" width="20%"></td>
         </tr>
