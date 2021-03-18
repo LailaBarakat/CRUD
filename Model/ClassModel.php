@@ -1,12 +1,13 @@
 <?php
 declare(strict_types=1);
 
-class ClassModel extends DataBase
+class ClassModel extends ClassLoader
 {
     private ?int $classID;
     private string $className;
     private string $classLocation;
     private string $teacherID;
+    private array $students;
 
     public function __construct($id, $className, $classLocation, $teacherID)
     {
@@ -14,6 +15,7 @@ class ClassModel extends DataBase
         $this->className = $className;
         $this->classLocation = $classLocation;
         $this->teacherID = $teacherID;
+        $this->students = $this->fetchStudents($this->classID);
     }
 
     public function getclassid(): int
@@ -35,4 +37,10 @@ class ClassModel extends DataBase
     {
         return $this->teacherID;
     }
+
+    public function getclassstudents(): array
+    {
+        return $this->students;
+    }
+
 }
