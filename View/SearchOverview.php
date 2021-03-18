@@ -1,5 +1,4 @@
 <?php
-var_dump($targets);
 require "includes/header.php";
 ?>
     <h1>Found who you're looking for?</h1>
