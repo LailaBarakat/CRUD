@@ -14,6 +14,7 @@ require 'Model/StudentModel.php';
 require 'Model/StudentLoader.php';
 require 'Model/SearchModel.php';
 require 'Model/SearchLoader.php';
+require 'Model/csvLoader.php';
 
 
 //include all your controllers here

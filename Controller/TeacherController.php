@@ -44,6 +44,31 @@ class TeacherController {
                     $teacher = $pdo->getTeacher((int)$_GET['id']);
                     require 'View/teacherEdit.php';
                     break;
+
+                case 'export':
+                    $export = new csvLoader();
+                    $file = 'teacherExport.csv';
+                    $list = array (
+                        array('firstName', 'lastName', 'email')
+                    );
+                    $teachers = $pdo->getAllTeachers();
+                    foreach($teachers as $teacher){
+                        array_push($list, array($teacher->getfirst_name(), $teacher->getlast_name(), $teacher->getemail()));
+                    }
+                    $export->export($list, $file);
+                    //require 'View/studentOverview.php';
+
+                    header('Content-Description: File Transfer');
+                    header('Content-Disposition: attachment; filename='.basename($file));
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate');
+                    header('Pragma: public');
+                    header('Content-Length: ' . filesize($file));
+                    header("Content-Type: text/plain");
+                    readfile($file);
+
+                    break;
+
                 default:
                     $teachers = $pdo->getAllTeachers();
                     require 'View/teacherOverview.php';

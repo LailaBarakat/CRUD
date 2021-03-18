@@ -5,7 +5,7 @@ require "includes/header.php"
 ?>
 
 
-    <h1>Classes</h1>
+    <h1>Classes</h1> <a href="?page=class&run=export" class="btn btn-primary">Export</a>
 
 
 <?php if (isset($message)): ?>

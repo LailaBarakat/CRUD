@@ -59,6 +59,31 @@ class StudentController
 
                     require 'View/studentEdit.php';
                     break;
+
+                case 'export':
+                    $export = new csvLoader();
+                    $file = 'studentExport.csv';
+                    $list = array (
+                        array('firstName', 'lastName', 'email')
+                    );
+                    $students = $pdo->getAllStudents();
+                    foreach($students as $student){
+                        array_push($list, array($student->getfirst_name(), $student->getlast_name(), $student->getemail()));
+                    }
+                    $export->export($list,$file);
+                    //require 'View/studentOverview.php';
+
+                    header('Content-Description: File Transfer');
+                    header('Content-Disposition: attachment; filename='.basename($file));
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate');
+                    header('Pragma: public');
+                    header('Content-Length: ' . filesize($file));
+                    header("Content-Type: text/plain");
+                    readfile($file);
+
+                    break;
+
                 default:
                     $students = $pdo->getAllStudents();
 
