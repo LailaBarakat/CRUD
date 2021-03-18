@@ -50,7 +50,10 @@ require "includes/header.php"
     </tbody>
 </table>
 
-<a href="?page=students&run=create" class="btn btn-primary">Create Student</a>
+<div class="col-2 mx-auto mt-4">
+    <a href="?page=students&run=create" class="btn btn-primary">Add New Student</a>
+</div>
+
 
 <style>
     label {
