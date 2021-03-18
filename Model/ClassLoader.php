@@ -7,6 +7,7 @@ class ClassLoader{
 
     private array $classArray = [];
 
+
     public function getAllClasses ():array {
 
         try {
@@ -46,6 +47,7 @@ class ClassLoader{
 
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
+
         }
         $conn = null;
         return $class;

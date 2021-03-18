@@ -8,15 +8,15 @@ class ClassController
     {
         $pdo = new ClassLoader();
 
-        if(!empty($_POST['name']) && !empty($_POST['teacherID'])){
+        if(!empty($_POST['name']) && !empty($_POST['location'])){
             if(empty($_POST['id'])){
-                $new = new ClassModel();
-                //call method to add new class
+                $new = new ClassModel(null, $_POST['name'], $_POST['location'],$_POST['teacher'] );
+                $pdo->insertNewClass($new);
 
-                $message= 'New Student Added';
+                $message= 'New Class Added';
             }else{
-                $update = new ClassModel();
-                //call method to update class
+                $update = new ClassModel( (int) $_POST['id'], $_POST['name'],$_POST['location'], $_POST['teacher']);
+                $pdo->updateCLass($update);
 
                 $message= 'Class Updated';
 
@@ -24,8 +24,8 @@ class ClassController
 
         }
         if(!empty($_POST['delete'])){
-            //add method to call class
-            //call method to delete class
+            $class = $pdo->getClass( (int) $_POST['id']);
+            $pdo->deleteClass($class);
 
             $message= 'Class Deleted';
         }
@@ -36,15 +36,15 @@ class ClassController
                     require 'View/classCreate.php';
                     break;
                 case 'detailed':
-                    //call a specific class
+                    $class = $pdo->getClass( (int) $_GET['id']); //placeholder may need specific object (left join)
                     require 'View/classDetail.php';
                     break;
                 case 'update':
-                    //call a specific class
+                    $class = $pdo->getClass( (int) $_GET['id']);
                     require 'View/classEdit.php';
                     break;
                 default:
-                    //call all classes
+                    $classes = $pdo->getAllClasses();
                     require 'View/classOverview.php';
                     break;
             }
