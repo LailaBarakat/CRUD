@@ -4,7 +4,9 @@ require "includes/header.php"
 
 ?>
 
+
     <h1>Classes</h1>
+
 
 <?php if (isset($message)): ?>
     <div class="alert alert-success" role="alert">
