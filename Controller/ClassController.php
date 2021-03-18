@@ -27,6 +27,9 @@ class ClassController
             $class = $pdo->getClass( (int) $_POST['id']);
             $pdo->deleteClass($class);
 
+            if(!empty($_GET['run']) && $_GET['run']==='detailed')
+            {$_GET['run']='';}
+
             $message= 'Class Deleted';
         }
 
