@@ -85,4 +85,9 @@ class TeacherModel {
         return $this->email;
     }
 
+    public function getteachername(): string
+    {
+        return $this->getfirst_name() . ' ' . $this->getlast_name();
+    }
+
 }
