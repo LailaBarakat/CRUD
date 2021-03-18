@@ -113,5 +113,16 @@ private array $studentArray = [];
         }
         $conn = null;
     }
+    public function fetchStudents($id): array
+    {
 
+        $DB = new DataBase();
+        $conn = $DB->connect();
+
+        $sql = "SELECT CONCAT_WS(' ',s.first_name,s.last_name) as name, s.id FROM Class c LEFT JOIN Student s ON c.id = s.classID WHERE c.id = '$id'";
+        $stmt = $conn->query($sql);
+        $results = $stmt->fetchAll();
+        return $results;
+
+    }
 }
