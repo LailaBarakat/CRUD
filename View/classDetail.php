@@ -17,7 +17,6 @@ require "includes/header.php";
         <thead>
         </thead>
         <tbody>
-
         <tr>
             <td>Class Name:</td>
             <td><?php echo htmlspecialchars($class->getclassname()) ?></td>
@@ -43,9 +42,7 @@ require "includes/header.php";
                 <?php foreach ($students as $student): ?>
                     <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo htmlspecialchars($student['name']); ?></a>
                     <br>
-
                 <?php endforeach; ?>
-            </td>
             </td>
         </tr>
         </tbody>

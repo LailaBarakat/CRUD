@@ -8,12 +8,14 @@ class ClassModel extends ClassLoader
     private string $classLocation;
     private string $teacherID;
 
+
     public function __construct($id, $className, $classLocation, $teacherID)
     {
         $this->classID = $id;
         $this->className = $className;
         $this->classLocation = $classLocation;
         $this->teacherID = $teacherID;
+
     }
 
     public function getclassid(): int
@@ -35,4 +37,5 @@ class ClassModel extends ClassLoader
     {
         return $this->teacherID;
     }
+
 }

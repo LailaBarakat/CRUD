@@ -27,7 +27,10 @@ class ClassController
             $class = $pdo->getClass((int)$_POST['id']);
             $pdo->deleteClass($class);
 
-            $message = 'Class Deleted';
+            if(!empty($_GET['run']) && $_GET['run']==='detailed')
+            {$_GET['run']='';}
+
+            $message= 'Class Deleted';
         }
 
         if (isset($_GET)) {
@@ -36,6 +39,7 @@ class ClassController
                     require 'View/classCreate.php';
                     break;
                 case 'detailed':
+
                     $studPdo = new StudentLoader();
                     $teachPdo = new TeacherLoader();
 
