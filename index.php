@@ -12,6 +12,8 @@ require 'Model/TeacherModel.php';
 require 'Model/TeacherLoader.php';
 require 'Model/StudentModel.php';
 require 'Model/StudentLoader.php';
+require 'Model/SearchModel.php';
+require 'Model/SearchLoader.php';
 
 
 //include all your controllers here
@@ -19,15 +21,20 @@ require 'Controller/HomepageController.php';
 require 'Controller/ClassController.php';
 require 'Controller/StudentController.php';
 require 'Controller/TeacherController.php';
+require 'Controller/SearchController.php';
 
 //you could write a simple IF here based on some $_GET or $_POST vars, to choose your controller
 //this file should never be more than 20 lines of code!
-$page = $_GET['page']??'';
-
+$page = $_GET['page'] ?? '';
 $controller = new StudentController();
 
-if (isset($_GET['page'])){
-    switch ($_GET['page']){
+if (!empty($_POST['search']))
+{
+    $controller = new SearchController();
+}
+elseif (isset($_GET['page']))
+{
+    switch ($_GET['page']) {
         case 'class':
             $controller = new ClassController();
             break;

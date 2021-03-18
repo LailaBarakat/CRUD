@@ -14,4 +14,7 @@
         </ul>
 
     </div>
+
+    <?php require 'searchbar.php' ?>
+
 </nav>
