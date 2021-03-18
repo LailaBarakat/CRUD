@@ -7,7 +7,6 @@ class ClassLoader{
 
 private array $classArray = [];
 
-
     public function getAllClasses ():array {
 
     try {
@@ -20,7 +19,7 @@ private array $classArray = [];
         // set the resulting array to associative
         $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($results as $row) {
-            $class=new ClassModel(int($row['id']),$row['location'],$row['name'],int($row['teacherID']));
+            $class=new ClassModel( (int)($row['id']),$row['name'],$row['location'],($row['teacherID']));
             array_push($this->classArray, $class);
         }
     } catch(PDOException $e) {
@@ -39,7 +38,7 @@ private array $classArray = [];
         $DB = new DataBase();
         $conn = $DB->connect();
 
-        $id=$class->getclassid();
+        $id=$conn->lastInsertId();
         $location=$class->getclasslocation();
         $name=$class->getclassname();
         $teacherID=$class->getteacherid();
