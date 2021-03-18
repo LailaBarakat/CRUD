@@ -11,6 +11,7 @@ require 'Model/ClassLoader.php';
 require 'Model/StudentModel.php';
 require 'Model/TeacherModel.php';
 require 'Model/StudentLoader.php';
+require 'Model/TeacherLoader.php';
 
 //include all your controllers here
 require 'Controller/HomepageController.php';
