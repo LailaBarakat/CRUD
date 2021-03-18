@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 class StudentModel extends DataBase
 {
-    private int $studentID;
+    private ?int $studentID;
     private string $firstname;
     private string $lastname;
     private string $email;
     private int $classID;
 
-    public function __construct( $id, $firstname, $lastname, $email, $classID)
+    public function __construct( ?int $id, $firstname, $lastname, $email, $classID)
     {
         $this->studentID = $id;
         $this->firstname = $firstname;
@@ -19,7 +19,7 @@ class StudentModel extends DataBase
         $this->classID = $classID;
     }
 
-    public function getid(): int
+    public function getid(): ?int
     {
         return $this->studentID;
     }
