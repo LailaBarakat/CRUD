@@ -96,4 +96,42 @@ private array $studentArray = [];
         $conn = null;
     }
 
+    public function getStudent ($id) {
+
+        try {
+            $DB = new DataBase();
+            $conn = $DB->connect();
+
+            $stmt = $conn->prepare("SELECT * FROM Student WHERE id = $id");
+            $stmt->execute();
+
+            $result=$stmt->fetch();
+
+            $student=new StudentModel((int)$result['id'],$result['first_name'],$result['last_name'],$result['email'],(int)$result['classID']);
+
+        } catch(PDOException $e) {
+            echo "Error: " . $e->getMessage();
+        }
+        $conn = null;
+
+        return $student;
+
+    }
+
+    public function deleteStudent(StudentModel $student): void
+    {
+        try {
+            $DB = new DataBase();
+            $conn = $DB->connect();
+
+            $id = $student->getid();
+            $sql = "DELETE FROM Student WHERE id = '$id'";
+            $conn->exec($sql);
+
+        } catch (PDOException $e) {
+            //echo $sql . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
 }
