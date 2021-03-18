@@ -7,7 +7,7 @@ class ClassModel extends ClassLoader
     private string $className;
     private string $classLocation;
     private string $teacherID;
-
+    private array $students;
 
     public function __construct($id, $className, $classLocation, $teacherID)
     {
@@ -15,7 +15,7 @@ class ClassModel extends ClassLoader
         $this->className = $className;
         $this->classLocation = $classLocation;
         $this->teacherID = $teacherID;
-
+        $this->students = $this->fetchStudents($this->classID);
     }
 
     public function getclassid(): int
@@ -36,6 +36,11 @@ class ClassModel extends ClassLoader
     public function getteacherid(): string
     {
         return $this->teacherID;
+    }
+
+    public function getclassstudents(): array
+    {
+        return $this->students;
     }
 
 }
