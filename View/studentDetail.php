@@ -31,7 +31,7 @@ require "includes/header.php";
     </tr>
     <tr>
         <td>Class Name:</td>
-        <td>placeholder</td>
+        <td><a href="?page=class&run=detailed&id=<?php echo htmlspecialchars((string) $student->getclassid()) ?>"> <?php echo htmlspecialchars($class->getclassname()) ?></a></td>
     </tr>
     <tr>
         <td>Class ID:</td>

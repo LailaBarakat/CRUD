@@ -8,6 +8,7 @@ class StudentController
     {
 
         $pdo = new StudentLoader();
+        $classpdo=new ClassLoader();
 
         if(!empty($_POST['first_name']) && !empty($_POST['last_name'])){
             if(empty($_POST['id'])){
@@ -41,6 +42,7 @@ class StudentController
                     break;
                 case 'detailed':
                     $student = $pdo->getStudent((int)$_GET['id']); //placeholder
+                    $class = $classpdo->getClass($student->getclassid());
                     require 'View/studentDetail.php';
                     break;
                 case 'update':
