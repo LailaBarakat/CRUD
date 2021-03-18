@@ -58,7 +58,8 @@ private array $studentArray = [];
         $DB = new DataBase();
         $conn = $DB->connect();
 
-        $id=$student->getid();
+//        $id=$student->getid();
+        $id=$conn->lastInsertId();
         $first_name=$student->getfirst_name();
         $last_name=$student->getlast_name();
         $email=$student->getemail();
