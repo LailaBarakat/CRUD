@@ -23,14 +23,14 @@ require 'Controller/TeacherController.php';
 $page = $_GET['page']??'';
 
 $controller = new StudentController();
-/*
+
 if(isset($_GET['page'])){
     $controller = match ($_GET['page']) {
         'class' => new ClassController(),
-        'teachers' => new TeacherController(),
+        'teacher' => new TeacherController(),
         'student' => new StudentController(),
     };
 }
-*/
+
 
 $controller->render($_GET, $_POST);
