@@ -27,9 +27,6 @@ class ClassController
             $class = $pdo->getClass( (int) $_POST['id']);
             $pdo->deleteClass($class);
 
-            if(!empty($_GET['run']) && $_GET['run']==='detailed')
-            {$_GET['run']='';}
-
             $message= 'Class Deleted';
         }
 
@@ -39,7 +36,13 @@ class ClassController
                     require 'View/classCreate.php';
                     break;
                 case 'detailed':
-                    $class = $pdo->getClass( (int) $_GET['id']); //placeholder may need specific object (left join)
+                    $studPdo = new StudentLoader();
+                    $teachPdo = new TeacherLoader();
+
+                    $class = $pdo->getClass((int) $_GET['id']); //placeholder may need specific object (left join)
+                    $students = $studPdo->fetchStudents($class->getclassid());
+                    $teacher = $teachPdo->getTeacher($class->getteacherid());
+
                     require 'View/classDetail.php';
                     break;
                 case 'update':
