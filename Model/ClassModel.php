@@ -35,6 +35,4 @@ class ClassModel extends ClassLoader
     {
         return $this->teacherID;
     }
-
-
 }

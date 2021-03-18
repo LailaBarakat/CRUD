@@ -14,40 +14,41 @@ require "includes/header.php";
 
     <!--class table-->
     <table class="table table-striped table-wide">
-    <thead>
-    </thead>
-    <tbody>
+        <thead>
+        </thead>
+        <tbody>
 
-    <tr>
-        <td>Class Name:</td>
-        <td><?php echo htmlspecialchars($class->getclassname()) ?></td>
-    </tr>
-    <tr>
-        <td>Class ID:</td>
-        <td><?php echo htmlspecialchars((string)$class->getclassid()) ?></td>
-    </tr>
-    <tr>
-        <td>Location:</td>
-        <td><?php echo htmlspecialchars($class->getclasslocation()) ?></td>
-    </tr>
-    <tr>
-        <td>Teacher:</td>
-        <td>
-            <a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string)$teacher->getid()); ?>"><?php echo htmlspecialchars($teacher->getteachername());?></a>
+        <tr>
+            <td>Class Name:</td>
+            <td><?php echo htmlspecialchars($class->getclassname()) ?></td>
+        </tr>
+        <tr>
+            <td>Class ID:</td>
+            <td><?php echo htmlspecialchars((string)$class->getclassid()) ?></td>
+        </tr>
+        <tr>
+            <td>Location:</td>
+            <td><?php echo htmlspecialchars($class->getclasslocation()) ?></td>
+        </tr>
+        <tr>
+            <td>Teacher:</td>
+            <td>
+                <a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string)$teacher->getid()); ?>"><?php echo htmlspecialchars($teacher->getteachername()); ?></a>
 
-        </td>
-    </tr>
-<tr>
-    <td>Students:</td>
-    <td>
-<?php foreach ($students as $student):?>
-    <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo htmlspecialchars($student['name']);?></a><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Students:</td>
+            <td>
+                <?php foreach ($students as $student): ?>
+                    <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo htmlspecialchars($student['name']); ?></a>
+                    <br>
 
-    <?php endforeach; ?>
-    </td>
-    </td>
-    </tr>
-    </tbody>
+                <?php endforeach; ?>
+            </td>
+            </td>
+        </tr>
+        </tbody>
     </table>
 
     <div class="col-2 mx-auto">
@@ -73,4 +74,4 @@ require "includes/header.php";
         }
     </style>
 
-    <?php require "includes/footer.php" ?>
+<?php require "includes/footer.php" ?>

@@ -8,26 +8,26 @@ class ClassController
     {
         $pdo = new ClassLoader();
 
-        if(!empty($_POST['name']) && !empty($_POST['location'])){
-            if(empty($_POST['id'])){
-                $new = new ClassModel(null, $_POST['name'], $_POST['location'],$_POST['teacher'] );
+        if (!empty($_POST['name']) && !empty($_POST['location'])) {
+            if (empty($_POST['id'])) {
+                $new = new ClassModel(null, $_POST['name'], $_POST['location'], $_POST['teacher']);
                 $pdo->insertNewClass($new);
 
-                $message= 'New Class Added';
-            }else{
-                $update = new ClassModel( (int) $_POST['id'], $_POST['name'],$_POST['location'], $_POST['teacher']);
+                $message = 'New Class Added';
+            } else {
+                $update = new ClassModel((int)$_POST['id'], $_POST['name'], $_POST['location'], $_POST['teacher']);
                 $pdo->updateCLass($update);
 
-                $message= 'Class Updated';
+                $message = 'Class Updated';
 
             }
 
         }
-        if(!empty($_POST['delete'])){
-            $class = $pdo->getClass( (int) $_POST['id']);
+        if (!empty($_POST['delete'])) {
+            $class = $pdo->getClass((int)$_POST['id']);
             $pdo->deleteClass($class);
 
-            $message= 'Class Deleted';
+            $message = 'Class Deleted';
         }
 
         if (isset($_GET)) {
@@ -39,14 +39,14 @@ class ClassController
                     $studPdo = new StudentLoader();
                     $teachPdo = new TeacherLoader();
 
-                    $class = $pdo->getClass((int) $_GET['id']); //placeholder may need specific object (left join)
+                    $class = $pdo->getClass((int)$_GET['id']); //placeholder may need specific object (left join)
                     $students = $studPdo->fetchStudents($class->getclassid());
                     $teacher = $teachPdo->getTeacher($class->getteacherid());
 
                     require 'View/classDetail.php';
                     break;
                 case 'update':
-                    $class = $pdo->getClass( (int) $_GET['id']);
+                    $class = $pdo->getClass((int)$_GET['id']);
                     require 'View/classEdit.php';
                     break;
                 default:
