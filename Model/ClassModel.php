@@ -8,7 +8,8 @@ class ClassModel extends DataBase
     private string $classLocation;
     private string $teacherID;
 
-    public function __construct($id, $className, $classLocation, $teacherID)
+    public function __construct( ?int $id, $className, $classLocation, int $teacherID)
+
     {
         $this->classID = $id;
         $this->className = $className;
