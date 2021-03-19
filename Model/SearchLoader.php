@@ -12,14 +12,13 @@ class SearchLoader
             $DB = new DataBase();
             $conn = $DB->connect();
 
-            $sql = "SELECT CONCAT_WS(' ', s.first_name, s.last_name) as name , 'student' AS type, id FROM Student s WHERE s.first_name LIKE '%$target' OR s.last_name LIKE '%$target%'
+            $sql = "SELECT CONCAT_WS(' ', s.first_name, s.last_name) as name , 'student' AS type, id FROM Student s WHERE s.first_name LIKE '%$target%' OR s.last_name LIKE '%$target%'
                     UNION SELECT CONCAT_WS(' ', t.first_name, t.last_name) as name, 'teacher' AS type, id
                     FROM Teacher t
                     WHERE t.first_name LIKE '%$target%' OR t.last_name LIKE '%$target%'
                     ORDER BY name";
 
             $stmt = $conn->query($sql);
-            var_dump($stmt);
             $stmt->execute();
 
             // set the resulting array to associative
