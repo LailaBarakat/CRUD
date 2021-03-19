@@ -19,24 +19,28 @@ require "includes/header.php"
 
 <form method="post" id="create-user">
 
-    <input type="hidden" name="id" value="" />
+    <div class="form-group container container-fluid">
+        <input class="form-control" type="hidden" name="id" value="" />
 
-    <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required value=""/>
+        <label class="form-label" for="name">Name:</label>
+        <input class="form-control" type="text" name="name" id="name" required value=""/>
 
-    <label for="location">Location:</label>
-    <input type="text" name="location" id="location" required value=""/>
+        <label class="form-label" for="location">Location:</label>
+        <input class="form-control" type="text" name="location" id="location" required value=""/>
 
-    <label for="teacher">Teacher:</label>
-    <select name="teacher" id="teacher">
-        <?php foreach ($teachers as $teacher):?>
-            <option value="<?php echo $teacher->getid()?>"><?php echo $teacher->getteachername()?></option>
-        <?php endforeach; ?>
-    </select>
+        <label class="form-label" for="teacher">Teacher:</label>
+        <select name="teacher" id="teacher">
+            <?php foreach ($teachers as $teacher):?>
+                <option value="<?php echo $teacher->getid()?>"><?php echo $teacher->getteachername()?></option>
+            <?php endforeach; ?>
+        </select>
 
-    <input type="submit" value="Add to list" />
-
+        <input class="btn btn-primary ml-4" type="submit" value="Add to list" />
 </form>
+
+    </div>
+
+
 
 <?php require "includes/footer.php" ?>
 
