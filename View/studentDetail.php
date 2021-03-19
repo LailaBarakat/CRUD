@@ -39,7 +39,7 @@ require "includes/header.php";
     </tr>
     <tr>
         <td>Teacher:</td>
-        <td><a href="?page=teachers&run=detailed&id=<?php echo htmlspecialchars((string) $teacher->getid())?>"> <?php echo htmlspecialchars((string) $teacher->getteachername()) ?></td>
+        <td><a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string) $teacher->getid())?>"> <?php echo htmlspecialchars((string) $teacher->getteachername()) ?></td>
 
     </tr>
 
