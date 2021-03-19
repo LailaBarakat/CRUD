@@ -39,12 +39,13 @@ class TeacherLoader{
             $DB = new DataBase();
             $conn = $DB->connect();
 
-            $id=$teacher->getid();
+//            $id=$teacher->getid();
+            $id=$conn->lastInsertId();
             $first_name=$teacher->getfirst_name();
             $last_name=$teacher->getlast_name();
             $email=$teacher->getemail();
 
-            $sql = "INSERT INTO Student (id, first_name, last_name, email)
+            $sql = "INSERT INTO Teacher (id, first_name, last_name, email)
                 VALUES ('$id', '$first_name', '$last_name', '$email')";
             // use exec() because no results are returned
             $conn->exec($sql);

@@ -1,7 +1,7 @@
 <?php
 
 class TeacherModel {
-    private int $ID;
+    private ?int $ID;
     private string $firstname;
     private string $lastname;
     private string $email;
@@ -13,7 +13,7 @@ class TeacherModel {
      * @param string $lastname
      * @param string $email
      */
-    public function __construct(int $ID, string $firstname, string $lastname, string $email)
+    public function __construct(?int $ID, string $firstname, string $lastname, string $email)
     {
         $this->ID = $ID;
         $this->firstname = $firstname;
@@ -56,7 +56,7 @@ class TeacherModel {
     /**
      * @return int
      */
-    public function getid(): int
+    public function getid(): ?int
     {
         return $this->ID;
     }
