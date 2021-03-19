@@ -28,6 +28,10 @@ class TeacherController {
             $delete = $pdo->getTeacher((int)$_POST['id']);
             $pdo->deleteTeacher($delete);
 
+            if (!empty($_GET['run']) && $_GET['run'] === 'detailed') {
+                $_GET['run'] = '';
+            }
+
             $message= 'Teacher Deleted';
         }
 
