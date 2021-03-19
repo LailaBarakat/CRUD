@@ -34,7 +34,7 @@ require "includes/header.php";
         <td>Students:</td>
         <td>
             <?php foreach ($students as $student): ?>
-                <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo $student['fullname']; ?></a>
+                <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo $student['fullname']; ?></a><br>
             <?php endforeach; ?>
         </td>
     </tr>

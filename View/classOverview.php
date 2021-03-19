@@ -20,7 +20,7 @@ require "includes/header.php"
         <tr>
             <th width="20%">Name</th>
             <th width="20%">Location</th>
-            <th width="20%">Teacher ID</th>
+<!--            <th width="20%">Teacher ID</th>-->
             <td colspan="2" width="20%"></td>
         </tr>
         </thead>
@@ -29,7 +29,7 @@ require "includes/header.php"
             <tr>
                 <td><?php echo htmlspecialchars($class->getclassname()) ?></td>
                 <td><?php echo htmlspecialchars($class->getclasslocation()) ?></td>
-                <td><?php echo htmlspecialchars($class->getteacherid()) ?></td>
+<!--                <td>--><?php //echo htmlspecialchars($class->getclassid()) ?><!--</td>-->
                 <td>
                     <a href="?page=class&run=update&id=<?php echo $class->getclassid() ?>"
                        class="btn btn-primary">Edit</a>
