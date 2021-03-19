@@ -48,7 +48,7 @@ require "includes/header.php";
 
 <div class="col-2 mx-auto">
 
-    <a href="?page=student&run=update&id=<?php echo $student->getid() ?>" class="btn btn-primary">Update</a>
+    <a href="?page=student&run=update&id=<?php echo $student->getid() ?>" class="btn btn-primary mt-4 mb-3">Update</a>
     <form method="post">
         <input type="hidden" name="id" value="<?php echo $student->getid() ?>"/>
         <input type="submit" name="delete" value="Delete" class="btn btn-danger">

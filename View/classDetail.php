@@ -50,11 +50,12 @@ require "includes/header.php";
 
     <div class="col-2 mx-auto">
 
-        <a href="?page=class&run=update&id=<?php echo $class->getclassid() ?>" class="btn btn-primary">Update</a>
-        <form method="post">
-            <input type="hidden" name="id" value="<?php echo $class->getclassid() ?>"/>
-            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
-        </form>
+            <a href="?page=class&run=update&id=<?php echo $class->getclassid() ?>" class="btn btn-primary mt-4 mb-3">Update</a>
+            <form method="post">
+                <input type="hidden" name="id" value="<?php echo $class->getclassid() ?>"/>
+                <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+            </form>
+
     </div>
 
     <style>
