@@ -19,27 +19,32 @@ require "includes/header.php"
 
 <form method="post" id="create-user">
 
-    <input type="hidden" name="id" value="<?php echo $student->getid(); ?>"/>
+    <div class="form-group container container-fluid">
+        <input  class="form-control" type="hidden" name="id" value="<?php echo $student->getid(); ?>"/>
 
-    <label for="first_name">First name:</label>
-    <input type="text" name="first_name" id="first_name" required value="<?php echo $student->getfirst_name(); ?>"/>
+        <label  class="form-label" for="first_name">First name:</label>
+        <input class="form-control" type="text" name="first_name" id="first_name" required value="<?php echo $student->getfirst_name(); ?>"/>
 
-    <label for="last_name">Last name:</label>
-    <input type="text" name="last_name" id="last_name" required value="<?php echo $student->getlast_name(); ?>"/>
+        <label  class="form-label" for="last_name">Last name:</label>
+        <input class="form-control" type="text" name="last_name" id="last_name" required value="<?php echo $student->getlast_name(); ?>"/>
 
-    <label for="email">Email:</label>
-    <input type="text" name="email" id="email" value="<?php echo $student->getemail(); ?>"/>
+        <label class="form-label" for="email">Email:</label>
+        <input class="form-control" type="text" name="email" id="email" value="<?php echo $student->getemail(); ?>"/>
 
-    <label for="class">Class:</label>
+        <label class="form-label" for="class">Class:</label>
 
-    <select name="class" id="class">
-        <?php foreach ($classes as $class): ?>
-            <option value="<?php echo $class->getclassid() ?>"><?php echo $class->getclassname() ?></option>
-        <?php endforeach; ?>
-    </select>
+        <select name="class" id="class">
+            <?php foreach ($classes as $class): ?>
+                <option value="<?php echo $class->getclassid() ?>"><?php echo $class->getclassname() ?></option>
+            <?php endforeach; ?>
+        </select>
 
 
-    <input type="submit" value="Update Student"/>
+        <input class="btn btn-primary ml-4" type="submit" value="Update Student"/>
+
+
+    </div>
+
 
 </form>
 
