@@ -125,4 +125,17 @@ private array $studentArray = [];
         return $results;
 
     }
+
+    public function fetchStudentsFromTeacher($id): array
+    {
+
+        $DB = new DataBase();
+        $conn = $DB->connect();
+
+        $sql = "SELECT CONCAT_WS(' ',s.first_name,s.last_name) as fullname, s.id FROM Student AS s INNER JOIN Class AS c ON s.classID = c.id WHERE c.teacherID = '$id'";
+        $stmt = $conn->query($sql);
+        $results = $stmt->fetchAll();
+        return $results;
+
+    }
 }
