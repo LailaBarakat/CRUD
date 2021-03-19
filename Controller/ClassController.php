@@ -58,6 +58,33 @@ class ClassController
                     $class = $pdo->getClass( (int) $_GET['id']);
                     require 'View/classEdit.php';
                     break;
+
+                case 'export':
+                    $export = new csvLoader();
+                    $file = 'classExport.csv';
+                    $teachPdo = new TeacherLoader();
+                    $list = array (
+                        array('Name', 'location', 'TeacherName')
+                    );
+                    $classes = $pdo->getAllClasses();
+                    foreach($classes as $class){
+                        $teacher= $teachPdo->getTeacher($class->getteacherid());
+                        array_push($list, array($class->getclassname(), $class->getclasslocation(), $teacher->getteachername()));
+                    }
+                    $export->export($list, $file);
+                    //require 'View/studentOverview.php';
+
+                    header('Content-Description: File Transfer');
+                    header('Content-Disposition: attachment; filename='.basename($file));
+                    header('Expires: 0');
+                    header('Cache-Control: must-revalidate');
+                    header('Pragma: public');
+                    header('Content-Length: ' . filesize($file));
+                    header("Content-Type: text/plain");
+                    readfile($file);
+
+                    break;
+
                 default:
                     $classes = $pdo->getAllClasses();
                     require 'View/classOverview.php';

@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 require "includes/header.php"
 ?>
 
-<h1>Students</h1>
+<h1>Students</h1> <a href="?page=students&run=export" class="btn btn-primary">Export</a>
 
 <?php if(isset($message)):?>
     <div class="alert alert-success" role="alert">
