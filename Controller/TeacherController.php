@@ -8,6 +8,7 @@ class TeacherController {
     {
 
         $pdo = new TeacherLoader();
+        $classLoader = new ClassLoader();
 
         if(!empty($_POST['first_name']) && !empty($_POST['last_name'])){
             if(empty($_POST['id'])){
@@ -25,14 +26,34 @@ class TeacherController {
 
         }
         if(!empty($_POST['delete'])){
-            $delete = $pdo->getTeacher((int)$_POST['id']);
-            $pdo->deleteTeacher($delete);
+            $teacherIdToDelete = (int)$_POST['id'];
+            $teacherToDelete = $pdo->getTeacher($teacherIdToDelete);
 
-            if (!empty($_GET['run']) && $_GET['run'] === 'detailed') {
-                $_GET['run'] = '';
+            $classes = $classLoader->getAllClasses();
+            $canDelete = true;
+            foreach($classes as $class){
+                if ($class->getteacherid() == $teacherIdToDelete) {
+                    $canDelete = false;
+                    break;
+                }
             }
 
-            $message= 'Teacher Deleted';
+            if ($canDelete == true) {
+                $pdo->deleteTeacher($teacherToDelete);
+
+                if (!empty($_GET['run']) && $_GET['run'] === 'detailed') {
+                    $_GET['run'] = '';
+                }
+
+                $message= 'Teacher Deleted';
+            }
+            else {
+               
+
+                $message= 'Teacher cannot be deleted. Teacher is still linked to a class.';
+            }
+
+
         }
 
         if (isset($_GET)) {

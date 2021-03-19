@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `Class` (
     `location` varchar(100) NOT NULL,
     `name` varchar(100) NOT NULL,
     `teacherID` int(11),
-    CONSTRAINT FK_teacherID FOREIGN KEY (`teacherID`) REFERENCES `Teacher` (`id`) ON DELETE CASCADE
+    CONSTRAINT FK_teacherID FOREIGN KEY (`teacherID`) REFERENCES `Teacher` (`id`)
     ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
@@ -26,5 +26,5 @@ CREATE TABLE IF NOT EXISTS `Student` (
      `last_name` varchar(100) NOT NULL,
      `email` varchar(100) NOT NULL,
      `classID` int(11),
-     CONSTRAINT FK_classID FOREIGN KEY (`classID`) REFERENCES `Class` (`id`) ON DELETE CASCADE
+     CONSTRAINT FK_classID FOREIGN KEY (`classID`) REFERENCES `Class` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
