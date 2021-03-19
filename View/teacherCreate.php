@@ -19,18 +19,20 @@ require "includes/header.php"
 
 <form method="post" id="create-teacher">
 
-    <input type="hidden" name="id" value="" />
+    <div class="form-group container container-fluid">
+        <input class="form-control" type="hidden" name="id" value="" />
 
-    <label for="first_name">First name:</label>
-    <input type="text" name="first_name" id="first_name" required value=""/>
+        <label class="form-label" for="first_name">First name:</label>
+        <input class="form-control" type="text" name="first_name" id="first_name" required value=""/>
 
-    <label for="last_name">Last name:</label>
-    <input type="text" name="last_name" id="last_name" required value=""/>
+        <label class="form-label" for="last_name">Last name:</label>
+        <input class="form-control" type="text" name="last_name" id="last_name" required value=""/>
 
-    <label for="email">Email:</label>
-    <input type="text" name="email" id="email" value=""/>
-
-    <input type="submit" value="Add to list" />
+        <label class="form-label" for="email">Email:</label>
+        <input class="form-control" type="text" name="email" id="email" value=""/>
+        
+        <button type="submit" class="btn btn-primary mt-4">Create Teacher</button>
+    </div>
 
 </form>
 
