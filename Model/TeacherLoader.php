@@ -96,4 +96,20 @@ class TeacherLoader{
         $conn = null;
     }
 
+    public function deleteTeacher(TeacherModel $teacher): void
+    {
+        try {
+            $DB = new DataBase();
+            $conn = $DB->connect();
+
+            $id = $teacher->getid();
+            $sql = "DELETE FROM Teacher WHERE id = '$id'";
+            $conn->exec($sql);
+
+        } catch (PDOException $e) {
+            //echo $sql . "<br>" . $e->getMessage();
+        }
+        $conn = null;
+    }
+
 }
