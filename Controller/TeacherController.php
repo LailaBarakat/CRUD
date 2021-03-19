@@ -25,14 +25,21 @@ class TeacherController {
 
         }
         if(!empty($_POST['delete'])){
+            $classPdo = new ClassLoader();
+
             $delete = $pdo->getTeacher((int)$_POST['id']);
-            $pdo->deleteTeacher($delete);
+            $class = $classPdo->getTeacher((int)$_POST['id']);
 
-            if (!empty($_GET['run']) && $_GET['run'] === 'detailed') {
-                $_GET['run'] = '';
+            if (!empty($class)){
+                $message = 'Teacher cannot be deleted, still assigned to a class';
+            } else {
+                $pdo->deleteTeacher($delete);
+
+                if (!empty($_GET['run']) && $_GET['run'] === 'detailed') {
+                    $_GET['run'] = '';
+                }
+                $message= 'Teacher Deleted';
             }
-
-            $message= 'Teacher Deleted';
         }
 
         if (isset($_GET)) {
