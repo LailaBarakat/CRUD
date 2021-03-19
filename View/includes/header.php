@@ -11,5 +11,5 @@
 <body>
     <?php require 'navigation.php' ?>
     <header>
-        <h1>Welcome to my site</h1>
+<!--        <h1>Welcome to my site</h1>-->
     </header>
