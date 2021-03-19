@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 require "includes/header.php"
 ?>
 
-<h1>Teachers</h1> <a href="?page=teacher&run=export" class="btn btn-primary mb-4 ml-4">Export</a>
+<h1>Teachers</h1>
 
 <?php if(isset($message)):?>
     <div class="alert alert-success" role="alert">
@@ -51,7 +51,8 @@ require "includes/header.php"
 </table>
 
 <div class="col-2 mx-auto mt-4">
-    <a href="?page=teacher&run=create" class="btn btn-primary">Add New Teacher</a>
+    <a href="?page=teacher&run=create" class="d-inline-block btn btn-primary">Add New Teacher</a>
+    <a href="?page=teacher&run=export" class="d-inline-block btn btn-primary ml-4">Export</a>
 </div>
 
 <style>
