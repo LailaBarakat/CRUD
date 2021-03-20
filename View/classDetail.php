@@ -4,7 +4,9 @@ require "includes/header.php";
 
 ?>
 
-    <h1>class Details</h1>
+    <div class="text-center mx-auto col-3">
+        <h1><?php echo ucfirst($type) ?> Details</h1>
+    </div>
 
 <?php if (isset($message)): ?>
     <div class="alert alert-success" role="alert">
@@ -13,18 +15,18 @@ require "includes/header.php";
 <?php endif; ?>
 
     <!--class table-->
-    <table class="table table-striped table-wide">
+    <table class="mx-auto col-7 table table-striped table-wide mt-2">
         <thead>
         </thead>
         <tbody>
 
         <tr>
             <td>Class Name:</td>
-            <td><?php echo htmlspecialchars($class->getclassname()) ?></td>
+            <td><?php echo htmlspecialchars($class->getName()) ?></td>
         </tr>
         <tr>
             <td>Class ID:</td>
-            <td><?php echo htmlspecialchars((string)$class->getclassid()) ?></td>
+            <td><?php echo htmlspecialchars((string)$class->getId()) ?></td>
         </tr>
         <tr>
             <td>Location:</td>
@@ -33,14 +35,15 @@ require "includes/header.php";
         <tr>
             <td>Teacher:</td>
             <td>
-                <a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string)$teacher->getid()); ?>"><?php echo $teacher->getteachername(); ?></a>
+                <a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string)$teacher->getId()); ?>"><?php echo $teacher->getFullName(); ?></a>
             </td>
         </tr>
         <tr>
             <td>Students:</td>
             <td>
                 <?php foreach ($students as $student): ?>
-                    <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo $student['name']; ?></a>
+                    <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"
+                       class="d-block"><?php echo $student['name']; ?></a>
 
                 <?php endforeach; ?>
             </td>
@@ -50,11 +53,11 @@ require "includes/header.php";
 
     <div class="col-2 mx-auto">
 
-            <a href="?page=class&run=update&id=<?php echo $class->getclassid() ?>" class="btn btn-primary mt-4 mb-3">Update</a>
-            <form method="post">
-                <input type="hidden" name="id" value="<?php echo $class->getclassid() ?>"/>
-                <input type="submit" name="delete" value="Delete" class="btn btn-danger">
-            </form>
+        <a href="?page=class&run=update&id=<?php echo $class->getId() ?>" class="btn btn-primary mt-4 mb-3">Update</a>
+        <form method="post">
+            <input type="hidden" name="id" value="<?php echo $class->getId() ?>"/>
+            <input type="submit" name="delete" value="Delete" class="btn btn-danger">
+        </form>
 
     </div>
 

@@ -6,20 +6,23 @@ class StudentController
     //render function with both $_GET and $_POST vars available if it would be needed.
     public function render(array $GET, array $POST): void
     {
-
+        $type = 'student';
         $pdo = new StudentLoader();
         $classpdo = new ClassLoader();
         $teacherpdo = new TeacherLoader();
 
-        if (!empty($_POST['first_name']) && !empty($_POST['last_name'])) {
+        if (!empty($_POST['first_name'])) {
             if (empty($_POST['id'])) {
-                $new = new StudentModel(null, $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int)$_POST['class']);
-                $pdo->insertNewStudent($new);
+
+                $student = new Student(null, $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int)$_POST['class']);
+                $pdo->insertNewStudent($student);
 
                 $message = 'New Student Added';
+
             } else {
-                $update = new StudentModel((int)$_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int)$_POST['class']);
-                $pdo->updateStudent($update);
+
+                $student = new Student((int)$_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email'], (int)$_POST['class']);
+                $pdo->updateStudent($student);
 
                 $message = 'Student Updated';
 
@@ -27,54 +30,69 @@ class StudentController
 
         }
         if (!empty($_POST['delete'])) {
-            $delete = $pdo->getStudent((int)$_POST['id']);
-            $pdo->deleteStudent($delete);
+
+            $student = $pdo->getStudent((int)$_POST['id']);
+            $pdo->deleteStudent($student);
 
             if (!empty($_GET['run']) && $_GET['run'] === 'detailed') {
-                $_GET['run'] = '';
+                unset($_GET['run']);
             }
 
             $message = 'Student Deleted';
         }
 
+        //Directs which view file to require, and prepares needed variables
         if (isset($_GET)) {
-            switch ($_GET['run'] ?? '') {
+            switch ($_GET['run']??'') {
                 case 'create':
-                    $classpdo = new ClassLoader();
-                    $classes = $classpdo->getAllClasses();
 
-                    require 'View/studentCreate.php';
+                    $group = $classpdo->getAllClasses();
+
+                    require 'View/Create.php';
                     break;
+
                 case 'detailed':
-                    $student = $pdo->getStudent((int)$_GET['id']); //placeholder
-                    $class = $classpdo->getClass($student->getclassid());
-                    $teacher = $teacherpdo->getTeacher($class->getteacherid());
+
+                    $student = $pdo->getStudent((int)$_GET['id']);
+                    $classId = $student->getClassId();
+                    $class = null;
+                    $teacher = null;
+
+                    if (!empty($classId)) {
+                        $class = $classpdo->getClass($classId);
+                        $teacherId = $class->getteacherid();
+                    }
+
+                    if (!empty($teacherId)) {
+                        $teacher = $teacherpdo->getTeacher($class->getteacherid());
+                    }
 
                     require 'View/studentDetail.php';
                     break;
-                case 'update':
-                    $classpdo = new ClassLoader();
-                    $classes = $classpdo->getAllClasses();
-                    $student = $pdo->getStudent((int)$_GET['id']);
 
-                    require 'View/studentEdit.php';
+                case 'update':
+
+                    $group = $classpdo->getAllClasses();
+                    $edit = $pdo->getStudent((int)$_GET['id']);
+
+                    require 'View/Edit.php';
                     break;
 
                 case 'export':
+
                     $export = new csvLoader();
                     $file = 'studentExport.csv';
-                    $list = array (
+                    $list = array(
                         array('firstName', 'lastName', 'email')
                     );
                     $students = $pdo->getAllStudents();
-                    foreach($students as $student){
-                        array_push($list, array($student->getfirst_name(), $student->getlast_name(), $student->getemail()));
+                    foreach ($students as $student) {
+                        $list[] = array($student->getFirstName(), $student->getLastName(), $student->getEmail());
                     }
-                    $export->export($list,$file);
-                    //require 'View/studentOverview.php';
+                    $export->export($list, $file);
 
                     header('Content-Description: File Transfer');
-                    header('Content-Disposition: attachment; filename='.basename($file));
+                    header('Content-Disposition: attachment; filename=' . basename($file));
                     header('Expires: 0');
                     header('Cache-Control: must-revalidate');
                     header('Pragma: public');
@@ -85,10 +103,10 @@ class StudentController
                     break;
 
                 default:
-                    $students = $pdo->getAllStudents();
 
-                    require 'View/studentOverview.php';
-                    break;
+                    $group = $pdo->getAllStudents();
+                    $overviewTag = "Email";
+                    require 'View/Overview.php';
             }
         }
 

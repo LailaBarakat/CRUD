@@ -1,9 +1,6 @@
 <?php
 
-require_once 'ClassModel.php';
-require_once 'DataBase.php';
-
-class ClassLoader
+class ClassLoader extends DataBase
 {
 
     private array $classArray = [];
@@ -13,14 +10,13 @@ class ClassLoader
     {
 
         try {
-            $DB = new DataBase();
-            $conn = $DB->connect();
+            $conn = $this->connect();
 
-            $stmt = $conn->prepare("SELECT id, location, name, teacherID FROM Class");
+            $sql = "SELECT id, location, name, teacherID FROM Class";
+            $stmt = $conn->prepare($sql);
             $stmt->execute();
+            $results = $stmt->fetchAll();
 
-            // set the resulting array to associative
-            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach ($results as $row) {
                 $class = new ClassModel((int)($row['id']), $row['name'], $row['location'], ($row['teacherID']));
                 array_push($this->classArray, $class);
@@ -40,8 +36,7 @@ class ClassLoader
 
         try {
 
-            $DB = new DataBase();
-            $conn = $DB->connect();
+           $conn = $this->connect();
 
             $stmt = $conn->query("SELECT c.id, c.location, c.name, c.teacherID FROM Class c WHERE c.id = $id");
             $result = $stmt->fetch();
@@ -60,12 +55,12 @@ class ClassLoader
     {
 
         try {
-            $DB = new DataBase();
-            $conn = $DB->connect();
+
+            $conn = $this->connect();
 
             $id = $conn->lastInsertId();
             $location = $class->getclasslocation();
-            $name = $class->getclassname();
+            $name = $class->getName();
             $teacherID = $class->getteacherid();
 
             $sql = "INSERT INTO Class (id, location, name, teacherID)
@@ -85,12 +80,11 @@ class ClassLoader
     {
 
         try {
-            $DB = new DataBase();
-            $conn = $DB->connect();
+            $conn = $this->connect();
 
-            $id = $class->getclassid();
+            $id = $class->getId();
             $location = $class->getclasslocation();
-            $name = $class->getclassname();
+            $name = $class->getName();
             $teacherID = $class->getteacherid();
 
             $sql = "UPDATE Class SET  location = '$location', name = '$name', teacherID = '$teacherID' WHERE id = '$id'";
@@ -105,10 +99,9 @@ class ClassLoader
     public function deleteClass(ClassModel $class): void
     {
         try {
-            $DB = new DataBase();
-            $conn = $DB->connect();
+            $conn = $this ->connect();
 
-            $id = $class->getclassid();
+            $id = $class->getId();
             $sql = "DELETE FROM Class WHERE id ='$id'";
             $conn->exec($sql);
 
@@ -123,8 +116,7 @@ class ClassLoader
     public function fetchStudents($id): array
     {
 
-        $DB = new DataBase();
-        $conn = $DB->connect();
+        $conn = $this->connect();
 
         $sql = "SELECT CONCAT_WS(' ',s.first_name,s.last_name) AS name , s.id FROM Class c LEFT JOIN Student s ON c.id = s.classID WHERE c.id = '$id'";
         $stmt = $conn->query($sql);

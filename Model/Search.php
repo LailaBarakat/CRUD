@@ -1,16 +1,16 @@
 <?php
 
 
-class SearchModel
+class Search
 {
     private string $name;
     private string $type;
     private int $id;
 
     /**
-     * SearchModel constructor.
+     * Search constructor.
      * @param string $name
-     * @param string $
+     * @param string $type
      * @param int $id
      */
     public function __construct(string $name, string $type, int $id)
@@ -23,7 +23,7 @@ class SearchModel
     /**
      * @return string
      */
-    public function getFindName(): string
+    public function getFullName(): string
     {
         return $this->name;
     }

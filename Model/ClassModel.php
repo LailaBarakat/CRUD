@@ -1,27 +1,27 @@
 <?php
 declare(strict_types=1);
 
-class ClassModel extends ClassLoader
+class ClassModel
 {
-    private ?int $classID;
+    private ?int $id;
     private string $className;
     private string $classLocation;
     private string $teacherID;
 
     public function __construct($id, $className, $classLocation, $teacherID)
     {
-        $this->classID = $id;
+        $this->id = $id;
         $this->className = $className;
         $this->classLocation = $classLocation;
         $this->teacherID = $teacherID;
     }
 
-    public function getclassid(): int
+    public function getId(): int
     {
-        return $this->classID;
+        return $this->id;
     }
 
-    public function getclassname(): string
+    public function getName(): string
     {
         return $this->className;
     }

@@ -1,39 +1,34 @@
 <?php
 
-require_once 'TeacherModel.php';
-require_once 'DataBase.php';
-
-class TeacherLoader{
+class TeacherLoader extends DataBase {
 
     private array $teacherArray = [];
+
+
 
 
     public function getAllTeachers ():array {
 
         try {
-            $DB = new DataBase();
-            $conn = $DB->connect();
 
-            $stmt = $conn->prepare("SELECT id, first_name, last_name, email FROM Teacher");
-            $stmt->execute();
+            $sql = "SELECT t.id, t.first_name, t.last_name, t.email FROM Teacher t";
+            $conn = $this->connect();
+            $stmt = $conn->query($sql);
+            $teachers = $stmt->fetchAll();
 
-            // set the resulting array to associative
-            $results=$stmt->fetchAll(PDO::FETCH_ASSOC);
-            foreach ($results as $row) {
-                $teacher=new TeacherModel(intval($row['id']),$row['first_name'],$row['last_name'],$row['email']);
-                array_push($this->teacherArray, $teacher);
+            foreach ($teachers as $teacher) {
+                $member = new Teacher($teacher['id'], $teacher['first_name'], $teacher['last_name'], $teacher['email']);
+                $this->teacherArray[] = $member;
             }
-        } catch(PDOException $e) {
+        } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
+
         $conn = null;
-
-
         return $this->teacherArray;
-
     }
 
-    public function insertNewTeacher (TeacherModel $teacher):void {
+    public function insertNewTeacher (Teacher $teacher):void {
 
         try {
             $DB = new DataBase();
@@ -41,9 +36,9 @@ class TeacherLoader{
 
 //            $id=$teacher->getid();
             $id=$conn->lastInsertId();
-            $first_name=$teacher->getfirst_name();
-            $last_name=$teacher->getlast_name();
-            $email=$teacher->getemail();
+            $first_name=$teacher->getFirstName();
+            $last_name=$teacher->getLastName();
+            $email=$teacher->getEmail();
 
             $sql = "INSERT INTO Teacher (id, first_name, last_name, email)
                 VALUES ('$id', '$first_name', '$last_name', '$email')";
@@ -58,7 +53,7 @@ class TeacherLoader{
     }
 
 
-    public function getTeacher(int $id): TeacherModel
+    public function getTeacher(int $id): Teacher
     {
 
         try {
@@ -68,7 +63,7 @@ class TeacherLoader{
 
             $stmt = $conn->query("SELECT id, first_name, last_name, email FROM Teacher WHERE id = $id");
             $result = $stmt->fetch();
-            $teacher = new TeacherModel( (int) $result['id'], $result['first_name'], $result['last_name'], $result['email']);
+            $teacher = new Teacher( (int) $result['id'], $result['first_name'], $result['last_name'], $result['email']);
 
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -78,16 +73,16 @@ class TeacherLoader{
 
     }
 
-    public function updateTeacher(TeacherModel $teacher): void
+    public function updateTeacher(Teacher $teacher): void
     {
         try {
             $DB = new DataBase();
             $conn = $DB->connect();
 
             $id = $teacher->getid();
-            $first_name = $teacher->getfirst_name();
-            $last_name = $teacher->getlast_name();
-            $email = $teacher->getemail();
+            $first_name = $teacher->getFirstName();
+            $last_name = $teacher->getLastName();
+            $email = $teacher->getEmail();
             $sql = "UPDATE Teacher SET  first_name = '$first_name', last_name = '$last_name', email = '$email' WHERE id = '$id'";
             $conn->exec($sql);
 
@@ -97,7 +92,7 @@ class TeacherLoader{
         $conn = null;
     }
 
-    public function deleteTeacher(TeacherModel $teacher): void
+    public function deleteTeacher(Teacher $teacher): void
     {
         try {
             $DB = new DataBase();

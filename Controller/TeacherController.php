@@ -6,18 +6,19 @@ class TeacherController {
     //render function with both $_GET and $_POST vars available if it would be needed.
     public function render(array $GET, array $POST): void
     {
+        $type = 'teacher';
 
         $pdo = new TeacherLoader();
         $classLoader = new ClassLoader();
 
         if(!empty($_POST['first_name']) && !empty($_POST['last_name'])){
             if(empty($_POST['id'])){
-                $new = new TeacherModel( null, $_POST['first_name'], $_POST['last_name'], $_POST['email']);
+                $new = new Teacher( null, $_POST['first_name'], $_POST['last_name'], $_POST['email']);
                 $pdo->insertNewTeacher($new);
 
                 $message= 'New Teacher Added';
             }else{
-                $update = new TeacherModel( (int) $_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email']);
+                $update = new Teacher( (int) $_POST['id'], $_POST['first_name'], $_POST['last_name'], $_POST['email']);
                 $pdo->updateTeacher($update);
 
                 $message= 'Teacher Updated';
@@ -59,19 +60,24 @@ class TeacherController {
         if (isset($_GET)) {
             switch ($_GET['run'] ?? '') {
                 case 'create':
-                    require 'View/teacherCreate.php';
+
+                    require 'View/Create.php';
                     break;
+
                 case 'detailed':
+
                     $studentPdo = new StudentLoader();
 
                     $teacher = $pdo->getTeacher((int)$_GET['id']); //placeholder
-                    $students = $studentPdo->fetchStudentsFromTeacher($teacher->getid());
+                    $students = $studentPdo->getStudentsByTeacher($teacher->getId());
 
                     require 'View/teacherDetail.php';
                     break;
+
                 case 'update':
-                    $teacher = $pdo->getTeacher((int)$_GET['id']);
-                    require 'View/teacherEdit.php';
+
+                    $edit = $pdo->getTeacher((int)$_GET['id']);
+                    require 'View/Edit.php';
                     break;
 
                 case 'export':
@@ -99,8 +105,9 @@ class TeacherController {
                     break;
 
                 default:
-                    $teachers = $pdo->getAllTeachers();
-                    require 'View/teacherOverview.php';
+                    $group = $pdo->getAllTeachers();
+                    $overviewTag = "Email";
+                    require 'View/Overview.php';
                     break;
             }
         }

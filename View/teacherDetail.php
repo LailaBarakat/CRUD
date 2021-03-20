@@ -3,7 +3,9 @@
 require "includes/header.php";
 ?>
 
-<h1>Teacher Details</h1>
+<div class="text-center mx-auto col-3">
+    <h1><?php echo ucfirst($type) ?> Details</h1>
+</div>
 
 <?php if (isset($message)): ?>
     <div class="alert alert-success" role="alert">
@@ -12,29 +14,29 @@ require "includes/header.php";
 <?php endif; ?>
 
 <!--students table-->
-<table class="table table-striped table-wide">
+<table class="mx-auto col-7 table table-striped table-wide mt-2">
     <thead>
     </thead>
     <tbody>
 
     <tr>
         <td>First Name:</td>
-        <td><?php echo htmlspecialchars($teacher->getfirst_name()) ?></td>
+        <td><?php echo htmlspecialchars($teacher->getFirstName()) ?></td>
     </tr>
     <tr>
         <td>Last Name:</td>
-        <td><?php echo htmlspecialchars($teacher->getlast_name()) ?></td>
+        <td><?php echo htmlspecialchars($teacher->getLastName()) ?></td>
     </tr>
     <tr>
         <td>Email:</td>
-        <td><?php echo htmlspecialchars($teacher->getemail()) ?></td>
+        <td><?php echo htmlspecialchars($teacher->getEmail()) ?></td>
     </tr>
 
     <tr>
         <td>Students:</td>
         <td>
             <?php foreach ($students as $student): ?>
-                <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>"><?php echo $student['fullname']; ?></a>
+                <a href="?page=student&run=detailed&id=<?php echo htmlspecialchars((string)$student['id']); ?>" class="d-block"><?php echo $student['fullname']; ?></a>
             <?php endforeach; ?>
         </td>
     </tr>
@@ -43,25 +45,13 @@ require "includes/header.php";
 </table>
 
 <div class="col-2 mx-auto">
-    <a href="?page=teacher&run=update&id=<?php echo $teacher->getid() ?>" class=" btn btn-primary mt-4 mb-3">Update</a>
+    <a href="?page=<?php echo $type ?>&run=update&id=<?php echo $teacher->getId() ?>" class=" btn btn-primary mt-4 mb-3">Update</a>
     <form method="post">
-        <input type="hidden" name="id" value="<?php echo $teacher->getid() ?>"/>
+        <input type="hidden" name="id" value="<?php echo $teacher->getId() ?>"/>
         <input type="submit" name="delete" value="Delete" class="btn btn-danger">
     </form>
 </div>
 
-<style>
-    label {
-        cursor: pointer;
-    }
 
-    label {
-        display: block;
-    }
-
-    form#create-user {
-        margin-left: 10px;
-    }
-</style>
 
 <?php require "includes/footer.php" ?>

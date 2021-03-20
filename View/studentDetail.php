@@ -3,7 +3,9 @@
 require "includes/header.php";
 ?>
 
-<h1>Student Details</h1>
+<div class="text-center mx-auto col-3">
+    <h1><?php echo ucfirst($type) ?> Details</h1>
+</div>
 
 <?php if (isset($message)): ?>
     <div class="alert alert-success" role="alert">
@@ -11,36 +13,38 @@ require "includes/header.php";
     </div>
 <?php endif; ?>
 
-<!--students table-->
-<table class="table table-striped table-wide">
+<table class="mx-auto col-7 table table-striped table-wide mt-2">
     <thead>
     </thead>
     <tbody>
 
     <tr>
         <td>First Name:</td>
-        <td><?php echo htmlspecialchars($student->getfirst_name()) ?></td>
+        <td><?php echo htmlspecialchars($student->getFirstName()) ?></td>
     </tr>
     <tr>
         <td>Last Name:</td>
-        <td><?php echo htmlspecialchars($student->getlast_name()) ?></td>
+        <td><?php echo htmlspecialchars($student->getLastName()) ?></td>
     </tr>
     <tr>
         <td>Email Name:</td>
-        <td><?php echo htmlspecialchars($student->getemail()) ?></td>
+        <td><?php echo htmlspecialchars($student->getEmail()) ?></td>
     </tr>
     <tr>
         <td>Class Name:</td>
-        <td><a href="?page=class&run=detailed&id=<?php echo htmlspecialchars((string) $student->getclassid()) ?>"> <?php echo htmlspecialchars($class->getclassname()) ?></a></td>
-    </tr>
-    <tr>
-        <td>Class ID:</td>
-        <td><?php echo htmlspecialchars((string) $student->getclassid()) ?></td>
+        <td>
+            <?php if (!empty($class)): ?>
+                <a href="?page=class&run=detailed&id=<?php echo $class->getId() ?>"> <?php echo $class->getName() ?></a>
+            <?php endif; ?>
+        </td>
     </tr>
     <tr>
         <td>Teacher:</td>
-        <td><a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string) $teacher->getid())?>"> <?php echo htmlspecialchars((string) $teacher->getteachername()) ?></td>
-
+        <td>
+            <?php if (!empty($teacher)): ?>
+            <a href="?page=teacher&run=detailed&id=<?php echo htmlspecialchars((string)$teacher->getId()) ?>"> <?php echo $teacher->getFullName() ?>
+                <?php endif; ?>
+        </td>
     </tr>
 
     </tbody>
@@ -48,9 +52,9 @@ require "includes/header.php";
 
 <div class="col-2 mx-auto">
 
-    <a href="?page=student&run=update&id=<?php echo $student->getid() ?>" class="btn btn-primary mt-4 mb-3">Update</a>
+    <a href="?page=student&run=update&id=<?php echo $student->getId() ?>" class="btn btn-primary mt-4 mb-3">Update</a>
     <form method="post">
-        <input type="hidden" name="id" value="<?php echo $student->getid() ?>"/>
+        <input type="hidden" name="id" value="<?php echo $student->getId() ?>"/>
         <input type="submit" name="delete" value="Delete" class="btn btn-danger">
     </form>
 </div>

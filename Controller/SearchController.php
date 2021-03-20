@@ -5,10 +5,12 @@ class SearchController
 
     public function render(array $GET, array $POST): void
     {
+        $type = "search";
+        $overviewTag = "Student/Teacher";
 
         $pdo = new SearchLoader();
-        $targets = $pdo->getSearchAll($_POST['target']);
+        $group = $pdo->getSearchAll($_POST['target']);
 
-        require 'View/SearchOverview.php';
+        require 'View/Overview.php';
     }
 }

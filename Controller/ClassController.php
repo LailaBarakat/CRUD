@@ -6,6 +6,7 @@ class ClassController
     //render function with both $_GET and $_POST vars available if it would be needed.
     public function render(array $GET, array $POST)
     {
+        $type = 'class';
         $pdo = new ClassLoader();
 
         if(!empty($_POST['name']) && !empty($_POST['location'])){
@@ -39,14 +40,14 @@ class ClassController
                     $teachPdo = new TeacherLoader();
                     $teachers = $teachPdo->getAllTeachers();
 
-                    require 'View/classCreate.php';
+                    require 'View/Create.php';
                     break;
                 case 'detailed':
                     $studPdo = new StudentLoader();
                     $teachPdo = new TeacherLoader();
 
                     $class = $pdo->getClass((int)$_GET['id']);
-                    $students = $studPdo->fetchStudents($class->getclassid());
+                    $students = $studPdo->getStudentsByClass($class->getId());
                     $teacher = $teachPdo->getTeacher($class->getteacherid());
 
                     require 'View/classDetail.php';
@@ -55,8 +56,8 @@ class ClassController
                     $teachPdo = new TeacherLoader();
                     $teachers = $teachPdo->getAllTeachers();
 
-                    $class = $pdo->getClass( (int) $_GET['id']);
-                    require 'View/classEdit.php';
+                    $edit = $pdo->getClass( (int) $_GET['id']);
+                    require 'View/Edit.php';
                     break;
 
                 case 'export':
@@ -69,10 +70,9 @@ class ClassController
                     $classes = $pdo->getAllClasses();
                     foreach($classes as $class){
                         $teacher= $teachPdo->getTeacher($class->getteacherid());
-                        array_push($list, array($class->getclassname(), $class->getclasslocation(), $teacher->getteachername()));
+                        $list[] = array($class->getName(), $class->getclasslocation(), $teacher->getFullName());
                     }
                     $export->export($list, $file);
-                    //require 'View/studentOverview.php';
 
                     header('Content-Description: File Transfer');
                     header('Content-Disposition: attachment; filename='.basename($file));
@@ -86,9 +86,9 @@ class ClassController
                     break;
 
                 default:
-                    $classes = $pdo->getAllClasses();
-                    require 'View/classOverview.php';
-                    break;
+                    $group = $pdo->getAllClasses();
+                    $overviewTag = 'location';
+                    require 'View/Overview.php';
             }
         }
     }
