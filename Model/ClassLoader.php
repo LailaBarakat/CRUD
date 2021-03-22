@@ -133,24 +133,17 @@ class ClassLoader
 
     }
 
-    public function getTeacher(int $id): ClassModel
+    public function fetchClassesFromTeacher(int $id): ClassModel
     {
 
-        try {
+        $DB = new DataBase();
+        $conn = $DB->connect();
 
-            $DB = new DataBase();
-            $conn = $DB->connect();
+        $stmt = $conn->query("SELECT c.id, c.location, c.name, c.teacherID FROM Class c WHERE c.teacherID = $id");
+        $results = $stmt->fetchAll();
 
-            $stmt = $conn->query("SELECT c.id, c.location, c.name, c.teacherID FROM Class c WHERE c.teacherID = $id");
-            $result = $stmt->fetch();
-            $teacher = new ClassModel((int)$result['id'], $result['name'], $result['location'], $result['teacherID']);
 
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-
-        }
-        $conn = null;
-        return $teacher;
+        return $results;
 
     }
 }
